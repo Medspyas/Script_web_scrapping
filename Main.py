@@ -156,13 +156,7 @@ for lien_categorie in liste_liens_categories:
     ecriture_fichiers_livres(chemin_utilisateur_livres, entete_produit,tous_les_produits_categorie, categorie_livre)
     tous_les_produits_categorie.clear()
 
-    """with open (chemin_utilisateur_livres+categorie_livre+".csv",'w',encoding='utf-8', newline ='') as csvfile:
-
-        writer = csv.writer(csvfile)
-
-        writer.writerow(entete_produit)
-        writer.writerows(tous_les_produits_categorie)
-    """
+    
 
 
 
