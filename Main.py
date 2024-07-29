@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from urllib.parse import urljoin
+import os
 
 
 
@@ -66,7 +67,7 @@ def extraction_image(url_img, chemin_utilisateur):
 def ecriture_fichiers_livres(chemin_utilisateur_livres, entete_produit, tous_les_produits_categorie, categorie_livre):
     chemin_fichier = chemin_utilisateur_livres+categorie_livre+".csv"
     
-    with open (chemin_fichier,'w',encoding='utf-8', newline ='') as csvfile:
+    with open (chemin_fichier,'w',encoding='utf-8-sig', newline ='') as csvfile:
 
         writer = csv.writer(csvfile)
 
@@ -156,13 +157,7 @@ for lien_categorie in liste_liens_categories:
     ecriture_fichiers_livres(chemin_utilisateur_livres, entete_produit,tous_les_produits_categorie, categorie_livre)
     tous_les_produits_categorie.clear()
 
-    """with open (chemin_utilisateur_livres+categorie_livre+".csv",'w',encoding='utf-8', newline ='') as csvfile:
-
-        writer = csv.writer(csvfile)
-
-        writer.writerow(entete_produit)
-        writer.writerows(tous_les_produits_categorie)
-    """
+   
 
 
 
