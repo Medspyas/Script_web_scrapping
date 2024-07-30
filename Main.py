@@ -12,7 +12,8 @@ base_url_categorie ='http://books.toscrape.com/catalogue/category/books/travel_2
 
 element_a_exclure = ["Product Type", "Tax"]
 
-chemin_utilisateur_image = "c:/Users/Mehdi/Desktop/Formation_Python_OC/Projet_2/images_livres"
+image_repertoire = "image_repertoire"
+os.makedirs(image_repertoire, exist_ok=True)
 
 csv_repertoire = "fichier_csv"
 os.makedirs(csv_repertoire, exist_ok=True)
@@ -56,13 +57,14 @@ def extraire_detail_produit(table ,element_a_exclure, infos_produit):
                 donnee = donnee_titre.text.strip()
                 infos_produit.append(donnee)
 
-def extraction_image(url_img, chemin_utilisateur):
+def extraction_image(url_img, image_repertoire):
     response = requests.get(url_img)
     if response.status_code == 200:
         num_image = url_img.split("/")[-1]
-        chemin_dossier = chemin_utilisateur + '/' +num_image
-        with open(chemin_dossier, 'wb') as f:
+        image_jpeg = os.path.join(image_repertoire, num_image)
+        with open(image_jpeg, 'wb') as f:
             f.write(response.content)
+    
     
 
 def ecriture_fichiers_livres(csv_repertoire, entete_produit, tous_les_produits_categorie, categorie_livre):
@@ -147,7 +149,7 @@ for lien_categorie in liste_liens_categories:
             infos_produit.append(image_url)
 
             extraire_detail_produit(table , element_a_exclure, infos_produit)
-            extraction_image(image_url, chemin_utilisateur_image)
+            extraction_image(image_url, image_repertoire)
             tous_les_produits_categorie.append(infos_produit.copy())
             infos_produit.clear()
                 
