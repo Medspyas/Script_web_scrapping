@@ -14,7 +14,8 @@ element_a_exclure = ["Product Type", "Tax"]
 
 chemin_utilisateur_image = "c:/Users/Mehdi/Desktop/Formation_Python_OC/Projet_2/images_livres"
 
-chemin_utilisateur_livres = "C:/Users/Mehdi/Desktop/Formation_Python_OC/Projet_2/données_livres_par_catégorie/"
+csv_repertoire = "fichier_csv"
+os.makedirs(csv_repertoire, exist_ok=True)
 
 
 tous_les_produits_categorie = []
@@ -64,16 +65,15 @@ def extraction_image(url_img, chemin_utilisateur):
             f.write(response.content)
     
 
-def ecriture_fichiers_livres(chemin_utilisateur_livres, entete_produit, tous_les_produits_categorie, categorie_livre):
-    chemin_fichier = chemin_utilisateur_livres+categorie_livre+".csv"
+def ecriture_fichiers_livres(csv_repertoire, entete_produit, tous_les_produits_categorie, categorie_livre):
     
-    with open (chemin_fichier,'w',encoding='utf-8-sig', newline ='') as csvfile:
+    fichier_csv = os.path.join(csv_repertoire, categorie_livre+".csv")
+    with open (fichier_csv,'w',encoding='utf-8-sig', newline ='') as csvfile:
 
         writer = csv.writer(csvfile)
 
         writer.writerow(entete_produit)
         writer.writerows(tous_les_produits_categorie)
-    
 
 response = requests.get(base_url)
 if response.status_code == 200:
@@ -154,7 +154,7 @@ for lien_categorie in liste_liens_categories:
     liens_livres.clear()
 
 
-    ecriture_fichiers_livres(chemin_utilisateur_livres, entete_produit,tous_les_produits_categorie, categorie_livre)
+    ecriture_fichiers_livres(csv_repertoire, entete_produit,tous_les_produits_categorie, categorie_livre)
     tous_les_produits_categorie.clear()
 
 
