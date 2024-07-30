@@ -157,11 +157,6 @@ for lien_categorie in liste_liens_categories:
     ecriture_fichiers_livres(chemin_utilisateur_livres, entete_produit,tous_les_produits_categorie, categorie_livre)
     tous_les_produits_categorie.clear()
 
-   
-
-
-
-
 
 
 
